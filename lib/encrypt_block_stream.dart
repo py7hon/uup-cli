@@ -5,8 +5,8 @@ import 'dart:typed_data';
 
 import 'package:http/http.dart' as http;
 import 'package:cryptography/cryptography.dart';
-import 'package:uup-cli/config.dart';
-import 'package:uup-cli/const.dart';
+import 'package:uup_cli/config.dart';
+import 'package:uup_cli/const.dart';
 import 'package:uuid/uuid.dart';
 import 'package:http_parser/http_parser.dart';
 

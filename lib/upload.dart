@@ -6,9 +6,9 @@ import 'package:cryptography/cryptography.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as p;
 import 'package:mime_type/mime_type.dart';
-import 'package:uup-cli/ansi_pens.dart';
-import 'package:uup-cli/encrypt_block_stream.dart';
-import 'package:uup-cli/const.dart';
+import 'package:uup_cli/ansi_pens.dart';
+import 'package:uup_cli/encrypt_block_stream.dart';
+import 'package:uup_cli/const.dart';
 
 void startEncryptAndUpload(
   File file,

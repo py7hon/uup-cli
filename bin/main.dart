@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:filesize/filesize.dart';
-import 'package:uup-cli/ansi_pens.dart';
-import 'package:uup-cli/download.dart';
-import 'package:uup-cli/upload.dart';
+import 'package:uup_cli/ansi_pens.dart';
+import 'package:uup_cli/download.dart';
+import 'package:uup_cli/upload.dart';
 
 
 void main(List<String> args) async {

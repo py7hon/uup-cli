@@ -5,7 +5,7 @@ import 'dart:typed_data';
 import 'package:cryptography/cryptography.dart';
 import 'package:http/http.dart' as http;
 import 'package:filesize/filesize.dart';
-import 'package:uup-cli/encrypt_block_stream.dart';
+import 'package:uup_cli/encrypt_block_stream.dart';
 
 class DownloadTask {
   CipherWithAppendedMac cipher;
