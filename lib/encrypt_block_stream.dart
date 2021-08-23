@@ -126,6 +126,7 @@ class EncryptionUploadTask {
     var byteStream = new http.ByteStream.fromBytes(chunk);
 
     var uri = Uri.parse('https://api.nft.storage/upload');
+    //var uri = Uri.parse('https://api.web3.storage/upload');
 
     var request = new http.MultipartRequest("POST", uri);
 
@@ -136,7 +137,8 @@ class EncryptionUploadTask {
       filename: 'blob',
       contentType: MediaType('application', 'octet-stream'),
     );
-    request.headers['authorization'] = '${API.KEY}';
+    request.headers['authorization'] = 'Bearer ${API.KEY}';
+    //request.headers['x-name'] = 'blob';
     request.files.add(multipartFile);
 
     var response = await request.send();

@@ -19,28 +19,35 @@ class DownloadTask {
     String cID,
     String key,
   ) async {
-    final res = await http.get(getRandomGateway()+'$cID/blob');
+        try {
+            final res = await http.get(getRandomGateway()+'$cID/blob');
 
-    final cryptParts = base64.decode(key);
+            final cryptParts = base64.decode(key);
 
-    cipher = CipherWithAppendedMac(aesCtr, Hmac(sha256));
+            cipher = CipherWithAppendedMac(aesCtr, Hmac(sha256));
 
-    secretKey = SecretKey(cryptParts.sublist(0, 32));
+            secretKey = SecretKey(cryptParts.sublist(0, 32));
 
-    final nonce = Nonce(cryptParts.sublist(32, 32 + 16));
+            final nonce = Nonce(cryptParts.sublist(32, 32 + 16));
 
-    final decryptedChunkIndex = await cipher.decrypt(
-      res.bodyBytes,
-      secretKey: secretKey,
-      nonce: nonce,
-    );
+            final decryptedChunkIndex = await cipher.decrypt(
+                res.bodyBytes,
+                secretKey: secretKey,
+                nonce: nonce,
+            );
 
-    chunkIndex = json.decode(utf8.decode(decryptedChunkIndex));
+            chunkIndex = json.decode(utf8.decode(decryptedChunkIndex));
 
-    metadata = chunkIndex['metadata'];
+            metadata = chunkIndex['metadata'];
 
-    return;
-  }
+            return;
+        } catch (e, st) {
+        //print(e);
+        print('failed get file.');
+        print('retrying another nodes...');
+        await Future.delayed(Duration(seconds: 3));
+      }
+    }
 
   void setDLState(String s) {
     progress.add(s);
@@ -121,9 +128,9 @@ class DownloadTask {
 
         return;
       } catch (e, st) {
-        print(e);
-        print(st);
-        print('retrying in 3 seconds...');
+        //print(e);
+        print('failed get file.');
+        print('retrying another nodes...');
         await Future.delayed(Duration(seconds: 3));
       }
     }
