@@ -11,11 +11,11 @@ jobs:
         os: [ubuntu-latest, windows-latest, macOS-latest]
         include:
           - os: ubuntu-latest
-            output-name: uup.bin
+            output-name: uup-linux.bin
           - os: macOS-latest
-            output-name: uup.bin
+            output-name: uup-macos.bin
           - os: windows-latest
-            output-name: uup.exe
+            output-name: uup-windows.exe
 
     steps:
       - uses: actions/checkout@v1
