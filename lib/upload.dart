@@ -6,6 +6,7 @@ import 'package:cryptography/cryptography.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as p;
 import 'package:mime_type/mime_type.dart';
+import 'package:uuid/uuid.dart';
 import 'package:uup_cli/ansi_pens.dart';
 import 'package:uup_cli/encrypt_block_stream.dart';
 import 'package:uup_cli/const.dart';
@@ -25,8 +26,11 @@ void startEncryptAndUpload(
   final nonce = Nonce.randomBytes(16);
 
   final totalChunks = (file.lengthSync() / (chunkSize + 32)).abs().toInt() + 1;
+  
+  final uploaderFileId = Uuid().v4();
 
   final metadata = {
+    'aid': uploaderFileId,
     'filename': p.basename(file.path),
     'type': mime(file.path),
     'chunksize': chunkSize,
@@ -75,9 +79,11 @@ void startEncryptAndUpload(
   final secret =
       base64.encode([...(await secretKey.extract()), ...nonce.bytes]);
 
-  final link = 'https://uup.bugs.today/#x-$cID+$secret';
+  final link = stringToBase64.encode('x-$cID/#$secret');
 
-  print('Secure Download Link for ${greenBold(metadata['filename'])}: $link');
+  print('Secure Download Link for ${greenBold(metadata['filename'])}:');
+  print('\nCLI: $link');
+  print('\nWeb: https://uup.bugs.today/x-$cID/#$secret');
 }
 
 Stream<List<int>> getStreamOfIOFile(Stream<List<int>> stream) async* {

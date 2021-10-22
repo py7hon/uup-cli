@@ -14,11 +14,9 @@ List<String> ipfsGateway = [
   'https://ipfs.io/ipfs/', // FAST and CORS
   'https://cloudflare-ipfs.com/ipfs/', // FAST and CORS, Video Stream not supported
   'https://ipfs.fleek.co/ipfs/', // FAST and CORS
-  'https://crustwebsites.net/ipfs/', // FAST and CORS
-  'https://3cloud.ee/ipfs/', // FAST and CORS
   'https://dweb.link/ipfs/', // FAST and CORS
-  'https://bluelight.link/ipfs/', // FAST and CORS
   'https://ipfs.trusti.id/ipfs/', // FAST and CORS
+  'https://ipfs.eu.org/ipfs/', // FAST and CORS
 ];
 
 String getRandomGateway() {
@@ -67,7 +65,7 @@ class EncryptionUploadTask {
     print('Total chunks: $totalChunks');
 
     final uploaderFileId = Uuid().v4();
-    print('Upload ID: $uploaderFileId');
+    print('Your Anon Upload ID: $uploaderFileId');
 
     setState('Encrypting and uploading file... (Chunk 1 of $totalChunks)');
 
@@ -134,7 +132,7 @@ class EncryptionUploadTask {
       'file',
       byteStream,
       chunk.length,
-      filename: 'blob',
+      filename: 'uup',
       contentType: MediaType('application', 'octet-stream'),
     );
     request.headers['authorization'] = 'Bearer ${API.KEY}';

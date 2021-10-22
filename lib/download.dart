@@ -20,7 +20,7 @@ class DownloadTask {
     String key,
   ) async {
         try {
-            final res = await http.get(getRandomGateway()+'$cID/blob');
+            final res = await http.get(getRandomGateway()+'$cID/uup');
 
             final cryptParts = base64.decode(key);
 
@@ -66,6 +66,9 @@ class DownloadTask {
     int i = 0;
 
     totalChunks = metadata['totalchunks'];
+    final aid = metadata['aid'];
+    
+    print('Downloading from Anon ID: $aid');
 
     setDLState('Downloading and decrypting chunk 1 of $totalChunks...');
 
@@ -101,7 +104,7 @@ class DownloadTask {
     while (true) {
       try {
         final chunkRes = await http.get(
-          getRandomGateway()+'$chunkcID/blob',
+          getRandomGateway()+'$chunkcID/uup',
         );
 
         final decryptedChunk = await cipher.decrypt(

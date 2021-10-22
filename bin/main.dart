@@ -16,29 +16,14 @@ void main(List<String> args) async {
   if (['download', 'dl', 'd', 'down', '-d', '--download'].contains(command)) {
     print('Downloading metadata...');
 
-    String hash = args[1];
+    String ccID = stringToBase64.decode(args[1]);
 
-    hash = hash.substring(hash.indexOf('#') + 1);
+    //ccID = ccID.substring(ccID.indexOf('x') + 2);
 
-    if (hash.startsWith(RegExp(r'[0-9]'))) {
-      print('Unsupported version. Please use the Web UI.');
-      return;
-    }
-
-    final lengthSep = hash.indexOf('-');
-
-    final version = hash.substring(0, lengthSep);
-    if (version == 'a') {
-      print('Unsupported version. Please use the Web UI.');
-      return;
-    }
-
-    hash = hash.substring(lengthSep + 1);
-
-    final sep = hash.indexOf('+');
-
-    final cID = hash.substring(0, sep);
-    final key = hash.substring(sep + 1);
+    final cID = ccID.substring(ccID.indexOf('x-') + 2);
+    final key = ccID.substring(ccID.indexOf('/#') + 2);
+    //print(cID);
+    //print(key);
 
     final dlTask = DownloadTask();
 
@@ -118,12 +103,14 @@ void main(List<String> args) async {
 }
 
 void exitWithHelp() {
-  print(greenBold('uup CLI v1'));
+  print(greenBold('uup CLI v1.9.3'));
+  print('\n');
+  print('Encrypted and Fully Decentralized File Share.\nUsing IPFS, Store on Filecoin and Ethereum.');
 
   print('\n');
 
   print(magenta('uup --upload') + ' path/to/file');
-  print(magenta('uup --download') + ' https://uup.bugs.today/#x-...');
+  print(magenta('uup --download') + ' a some random string like '+'eC1RbVZaeFFZb010UTloQVhDdTVEamd...');
 
   print('\n');
   print(
