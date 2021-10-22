@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:cryptography/cryptography.dart';
 import 'package:http/http.dart' as http;
@@ -11,9 +12,12 @@ import 'package:uup_cli/ansi_pens.dart';
 import 'package:uup_cli/encrypt_block_stream.dart';
 import 'package:uup_cli/const.dart';
 
+
 void startEncryptAndUpload(
   File file,
 ) async {
+
+  Codec<String, String> stringToBase64 = utf8.fuse(base64);
 
   // Choose the cipher
   final cipher = CipherWithAppendedMac(aesCtr, Hmac(sha256));

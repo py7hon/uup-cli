@@ -4,12 +4,15 @@ import 'package:filesize/filesize.dart';
 import 'package:uup_cli/ansi_pens.dart';
 import 'package:uup_cli/download.dart';
 import 'package:uup_cli/upload.dart';
-
+import 'dart:math';
+import 'dart:convert';
 
 void main(List<String> args) async {
   if (args.length != 2) {
     exitWithHelp();
   }
+  
+  Codec<String, String> stringToBase64 = utf8.fuse(base64);
 
   final command = args.first;
 
