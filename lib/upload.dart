@@ -87,7 +87,7 @@ void startEncryptAndUpload(
 
   print('Secure Download Link for ${greenBold(metadata['filename'])}:');
   print('\nCLI: $link');
-  print('\nWeb: https://uup.bugs.today/x-$cID/#$secret');
+  print('\nWeb: https://uup.bugs.today/#x-$cID+$secret');
 }
 
 Stream<List<int>> getStreamOfIOFile(Stream<List<int>> stream) async* {

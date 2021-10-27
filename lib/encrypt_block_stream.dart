@@ -17,6 +17,7 @@ List<String> ipfsGateway = [
   'https://dweb.link/ipfs/', // FAST and CORS
   'https://ipfs.trusti.id/ipfs/', // FAST and CORS
   'https://ipfs.eu.org/ipfs/', // FAST and CORS
+  'http://ipfs.iqbalrifai.eu.org/ipfs/', // FAST, CORS and Host on Bulletproof Server
 ];
 
 String getRandomGateway() {
